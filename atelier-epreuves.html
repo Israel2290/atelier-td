@@ -112,6 +112,10 @@
     .action-button:hover { background: #3b4439; }
     .action-button:disabled { opacity: .45; cursor: not-allowed; }
     .action-button.secondary { border-color: var(--line); background: var(--white); color: var(--ink); }
+    .action-button.secondary.selected { border-color: var(--green-dark); background: #edf4d5; color: #33451b; font-weight: 800; }
+    .action-button.secondary.selected[data-status="review"] { border-color: var(--coral); background: var(--coral-pale); color: #8b432e; }
+    .assessment { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+    .assessment span { margin-right: auto; color: var(--muted); font-size: 12px; }
     .feedback { margin-top: 15px; padding: 12px 14px; border-left: 3px solid var(--green-dark); background: #f3f7e5; font-size: 13px; }
     .feedback.wrong { border-color: var(--coral); background: var(--coral-pale); }
     .feedback strong { display: block; margin-bottom: 3px; }
@@ -577,7 +581,7 @@
       const qcms = questions.filter(question => question.type === 'qcm');
       const correct = qcms.filter(question => getStatus(question) === 'correct').length;
       const reviewed = questions.filter(question => getStatus(question) === 'review').length;
-      const done = questions.filter(question => ['correct','incorrect','known','review'].includes(getStatus(question))).length;
+      const done = questions.filter(question => ['correct','incorrect','checked','known','review'].includes(getStatus(question))).length;
       const percent = Math.round(done / questions.length * 100);
       document.getElementById('correctCount').textContent = correct;
       document.getElementById('reviewCount').textContent = reviewed;
@@ -603,6 +607,7 @@
       const status = saved.status || '';
       const answered = ['correct','incorrect'].includes(status);
       const written = question.type === 'written';
+      const hasWrittenResponse = Boolean(saved.response?.trim());
       const options = question.options ? `<div class="options">${question.options.map((option, index) => {
         let state = selectedOption === index ? 'chosen' : '';
         if (answered && index === question.correct) state = 'correct';
@@ -610,9 +615,9 @@
         return `<button class="answer-option ${state}" type="button" data-option="${index}" ${answered ? 'disabled' : ''}><span class="option-key">${String.fromCharCode(65 + index)}</span><span>${escapeHTML(option)}</span></button>`;
       }).join('')}</div>` : `<p class="written-hint">Réponds à la consigne, puis compare avec la correction.</p><textarea id="response" aria-label="Ta réponse" placeholder="Écris ta réponse ici…">${escapeHTML(saved.response || '')}</textarea>`;
       const feedback = answered ? `<div class="feedback ${status === 'incorrect' ? 'wrong' : ''}"><strong>${status === 'correct' ? 'Bonne réponse.' : 'Pas tout à fait.'}</strong>${status === 'correct' ? escapeHTML(question.explanation) : `La bonne réponse était ${String.fromCharCode(65 + question.correct)}. ${escapeHTML(question.explanation)}`}</div>` : '';
-      const assessment = written && saved.revealed ? `<div class="assessment"><span>Comment évalues-tu ta réponse ?</span><button class="action-button secondary ${saved.status === 'known' ? 'selected' : ''}" type="button" data-status="known">Maîtrisée</button><button class="action-button secondary ${saved.status === 'review' ? 'selected' : ''}" type="button" data-status="review">À revoir</button></div>` : '';
+      const assessment = written && saved.revealed ? `<div class="assessment"><span>Comment évalues-tu ta réponse ?</span><button class="action-button secondary ${saved.status === 'known' ? 'selected' : ''}" type="button" data-status="known" aria-pressed="${saved.status === 'known'}">Maîtrisée</button><button class="action-button secondary ${saved.status === 'review' ? 'selected' : ''}" type="button" data-status="review" aria-pressed="${saved.status === 'review'}">À revoir</button></div>` : '';
       const explanation = written && saved.revealed ? `<div class="explanation"><h3>Réponse attendue</h3><p class="model">${escapeHTML(question.model).replace(/\n/g, '<br>')}</p><p style="margin-top:10px">${escapeHTML(question.explanation)}</p>${assessment}</div>` : '';
-      card.innerHTML = `<div class="question-meta"><span class="tag ${written ? 'written' : ''}">${written ? 'Réponse libre' : 'QCM'}</span><span>${escapeHTML(question.subject)} · ${escapeHTML(question.section)}</span><span class="question-number">${currentIndex + 1} / ${visibleQuestions.length}</span></div><h2>${escapeHTML(question.prompt)}</h2>${options}${feedback}${explanation}<div class="card-bottom"><span class="source-caption">Source : ${escapeHTML(question.source)}</span>${written ? `<button class="text-action" id="showAnswer" type="button">${saved.revealed ? 'Masquer la réponse' : 'Voir la réponse modèle'}</button>` : `<button class="action-button" id="checkAnswer" type="button" ${selectedOption === null || answered ? 'disabled' : ''}>Vérifier ma réponse</button>`}</div>`;
+      card.innerHTML = `<div class="question-meta"><span class="tag ${written ? 'written' : ''}">${written ? 'Réponse libre' : 'QCM'}</span><span>${escapeHTML(question.subject)} · ${escapeHTML(question.section)}</span><span class="question-number">${currentIndex + 1} / ${visibleQuestions.length}</span></div><h2>${escapeHTML(question.prompt)}</h2>${options}${feedback}${explanation}<div class="card-bottom"><span class="source-caption">Source : ${escapeHTML(question.source)}</span>${written ? `<button class="action-button" id="checkWrittenAnswer" type="button" ${hasWrittenResponse ? '' : 'disabled'}>${saved.revealed ? 'Vérifier à nouveau' : 'Vérifier ma réponse'}</button>` : `<button class="action-button" id="checkAnswer" type="button" ${selectedOption === null || answered ? 'disabled' : ''}>Vérifier ma réponse</button>`}</div>`;
       card.querySelectorAll('[data-option]').forEach(button => button.addEventListener('click', () => {
         selectedOption = Number(button.dataset.option);
         progress[question.id] = {...progress[question.id], selected: selectedOption};
@@ -620,7 +625,20 @@
         renderQuestion();
       }));
       const response = card.querySelector('#response');
-      if (response) response.addEventListener('input', () => { progress[question.id] = {...progress[question.id], response: response.value}; saveProgress(); });
+      if (response) response.addEventListener('input', () => {
+        const updated = {...progress[question.id], response: response.value};
+        if (updated.revealed || updated.status) {
+          updated.revealed = false;
+          delete updated.status;
+          card.querySelector('.explanation')?.remove();
+        }
+        progress[question.id] = updated;
+        const writtenCheck = card.querySelector('#checkWrittenAnswer');
+        if (writtenCheck) writtenCheck.disabled = !response.value.trim();
+        if (writtenCheck) writtenCheck.textContent = 'Vérifier ma réponse';
+        saveProgress();
+        renderStats();
+      });
       const checkButton = card.querySelector('#checkAnswer');
       if (checkButton) checkButton.addEventListener('click', () => {
         const correct = selectedOption === question.correct;
@@ -629,12 +647,12 @@
         renderQuestion();
         renderStats();
       });
-      const revealButton = card.querySelector('#showAnswer');
-      if (revealButton) revealButton.addEventListener('click', () => {
-        const revealed = !progress[question.id]?.revealed;
-        progress[question.id] = {...progress[question.id], revealed};
+      const writtenCheck = card.querySelector('#checkWrittenAnswer');
+      if (writtenCheck) writtenCheck.addEventListener('click', () => {
+        progress[question.id] = {...progress[question.id], status:'checked', revealed:true};
         saveProgress();
         renderQuestion();
+        renderStats();
       });
       card.querySelectorAll('[data-status]').forEach(button => button.addEventListener('click', () => {
         progress[question.id] = {...progress[question.id], status: button.dataset.status};
