@@ -52,6 +52,16 @@
     .main-nav button { padding: 7px 11px; border: 1px solid transparent; border-radius: var(--radius); background: transparent; color: #595b52; font-size: 12px; cursor: pointer; }
     .main-nav button:hover { background: var(--paper); }
     .main-nav button.active { border-color: #d5dfb2; background: #eef3dc; color: #33451b; font-weight: 800; }
+    .global-search-wrap { position: relative; flex: 0 1 250px; min-width: 170px; }
+    .global-search-wrap input { width: 100%; height: 34px; padding: 6px 10px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); color: var(--ink); font-size: 12px; }
+    .global-search-results { position: absolute; top: calc(100% + 6px); right: 0; z-index: 10; width: min(420px, 88vw); max-height: min(65vh, 520px); overflow-y: auto; padding: 7px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); box-shadow: 0 8px 24px rgba(32, 37, 31, .14); }
+    .global-search-results[hidden] { display: none; }
+    .global-search-results h2 { margin: 8px 8px 4px; color: var(--muted); font-family: inherit; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+    .global-search-results button { display: block; width: 100%; padding: 8px; border: 0; border-radius: var(--radius); background: transparent; text-align: left; cursor: pointer; }
+    .global-search-results button:hover { background: var(--paper); }
+    .global-search-results strong, .global-search-results span { display: block; }
+    .global-search-results strong { font-size: 12px; }
+    .global-search-results span { margin-top: 2px; color: var(--muted); font-size: 10px; }
     .layout { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 250px minmax(0, 1fr) 270px; min-height: calc(100vh - 62px); }
     aside { padding: 28px 20px; }
     .left-rail { border-right: 1px solid var(--line); }
@@ -185,18 +195,75 @@
     .template-empty { grid-column: 1 / -1; padding: 36px 20px; border: 1px dashed var(--line); border-radius: var(--radius); color: var(--muted); text-align: center; }
     .template-toast { position: fixed; right: 20px; bottom: 20px; z-index: 5; padding: 9px 14px; border-radius: var(--radius); background: var(--ink); color: #fff; font-size: 12px; }
     .template-toast[hidden] { display: none; }
+    .layout[data-view="corrected"] { grid-template-columns: minmax(0, 1fr); }
+    .layout[data-view="corrected"] .left-rail, .layout[data-view="corrected"] .right-rail { display: none; }
+    .corrected-exams-view[hidden], .exam-detail-view[hidden] { display: none !important; }
+    .corrected-exams-intro, .exam-detail-intro { margin-bottom: 20px; }
+    .corrected-exam-toolbar { display: grid; grid-template-columns: minmax(240px, 2fr) repeat(2, minmax(150px, 1fr)); gap: 9px; padding: 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+    .corrected-exam-toolbar input, .corrected-exam-toolbar select { width: 100%; height: 36px; padding: 7px 9px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; color: var(--ink); font-size: 12px; }
+    .corrected-exam-results { margin: 12px 1px; color: var(--muted); font-size: 12px; }
+    .corrected-exam-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .exam-library-card { min-width: 0; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+    .exam-library-card h2 { margin: 14px 0 8px; font-size: 21px; }
+    .exam-library-card p { margin: 7px 0; color: #53554b; font-size: 12px; overflow-wrap: anywhere; }
+    .exam-status { display: inline-block; margin-right: 7px; padding: 3px 7px; border-radius: 2px; background: #edf4d5; color: #425820; font-size: 10px; font-weight: 800; }
+    .exam-status.partial { background: #f5e9e3; color: #8b432e; }
+    .exam-status-detail { color: var(--muted); font-size: 11px; }
+    .exam-card-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 15px; }
+    .exam-card-actions .text-action { text-decoration: none; }
+    .exam-back { margin-bottom: 15px; }
+    .exam-metadata { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; margin: 16px 0; }
+    .exam-metadata div { min-width: 0; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+    .exam-metadata span, .exam-metadata strong { display: block; }
+    .exam-metadata span { color: var(--muted); font-size: 10px; }
+    .exam-metadata strong { margin-top: 3px; font-size: 12px; overflow-wrap: anywhere; }
+    .exam-detail-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; padding: 11px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+    .exam-detail-toolbar a { margin-left: auto; color: var(--muted); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+    .exam-reveal-progress { display: flex; align-items: center; gap: 10px; margin: 13px 2px 19px; color: var(--muted); font-size: 11px; }
+    .exam-reveal-progress .progress-track { flex: 1; }
+    .exam-transcription, .exam-correction-section { margin-top: 20px; }
+    .exam-transcription > h2, .exam-correction-section > h2 { margin: 0 0 12px; font-size: 23px; }
+    .exam-markdown { padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); overflow-wrap: anywhere; }
+    .exam-markdown h1 { margin: 22px 0 12px; font-size: 25px; }
+    .exam-markdown h2 { margin: 20px 0 10px; font-size: 20px; }
+    .exam-markdown h3, .exam-markdown h4 { margin: 16px 0 7px; font-size: 15px; }
+    .exam-markdown p { margin: 8px 0; white-space: normal; }
+    .exam-markdown table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .exam-markdown th, .exam-markdown td { padding: 7px 8px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .exam-markdown th { background: #f0f0e8; }
+    .exam-table-scroll { max-width: 100%; overflow-x: auto; margin: 12px 0; }
+    .exam-markdown blockquote { margin: 10px 0; padding: 8px 12px; border-left: 3px solid var(--green); background: #f6f7f0; color: #53554b; }
+    .exam-markdown-code { position: relative; overflow-x: auto; margin: 12px 0; padding: 13px; border: 1px solid #d9d9ce; border-radius: var(--radius); background: #f2f2eb; color: #25343a; font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 12px; line-height: 1.55; white-space: pre; }
+    .exam-markdown-code code { font: inherit; }
+    .exam-markdown-code button { position: sticky; float: right; right: 0; margin-left: 12px; padding: 4px 8px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); cursor: pointer; font: 11px "Trebuchet MS", sans-serif; }
+    .exam-correction-list { display: grid; gap: 9px; }
+    .exam-correction-item { border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+    .exam-correction-item summary { padding: 12px 14px; cursor: pointer; font-weight: 700; }
+    .exam-correction-item[open] summary { border-bottom: 1px solid var(--line); background: #faf9f2; }
+    .exam-correction-body { padding: 14px; }
+    .exam-question-prompt { margin: 0 0 12px; color: var(--muted); font-size: 12px; }
+    .exam-answer { padding: 10px; border-left: 3px solid var(--green-dark); background: #f3f7e5; }
+    .exam-correction-model, .exam-correction-explanation { margin-top: 12px; }
+    .exam-correction-model h4, .exam-correction-explanation h4 { margin: 8px 0 4px; font-size: 12px; }
+    .exam-correction-explanation p { margin: 5px 0; color: #53554b; font-size: 12px; }
+    .exam-template-links { margin-top: 12px; }
     @media (max-width: 1050px) {
       .layout { grid-template-columns: 220px minmax(0, 1fr); }
       .right-rail { display: none; }
       main { padding-right: 28px; padding-left: 28px; }
       .templates-toolbar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .templates-toolbar .template-search { grid-column: 1 / -1; }
+      .corrected-exam-toolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .corrected-exam-toolbar .exam-search { grid-column: 1 / -1; }
     }
     @media (max-width: 700px) {
       .topbar { height: 54px; padding: 0 16px; }
       .top-note { font-size: 10px; }
       .main-nav { gap: 2px; margin: 0 5px 0 auto; }
       .main-nav button { padding: 6px 8px; font-size: 11px; }
+      .topbar { height: auto; min-height: 54px; flex-wrap: wrap; gap: 6px; padding: 7px 12px; }
+      .global-search-wrap { order: 3; flex: 1 0 100%; min-width: 0; }
+      .top-note { display: none; }
       .layout { display: block; min-height: calc(100vh - 54px); }
       .left-rail { padding: 12px 14px 10px; border-right: 0; border-bottom: 1px solid var(--line); }
       .left-rail > .rail-label, .left-rail > .rail-rule, .left-rail > .source-list, .left-rail > .sources-heading { display: none; }
@@ -229,6 +296,10 @@
       .template-card h2 { font-size: 19px; }
       .template-summary { align-items: flex-start; flex-direction: column; }
       .template-toast { right: 12px; bottom: 12px; }
+      .corrected-exam-grid { grid-template-columns: 1fr; }
+      .exam-metadata { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .exam-detail-toolbar a { margin-left: 0; }
+      .exam-markdown { padding: 13px; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
   </style>
@@ -240,7 +311,12 @@
       <nav class="main-nav" aria-label="Navigation principale">
         <button type="button" class="active" data-view-target="exams" aria-pressed="true">Épreuves</button>
         <button type="button" data-view-target="templates" aria-pressed="false">Templates</button>
+        <button type="button" data-view-target="corrected" aria-pressed="false">Épreuves corrigées</button>
       </nav>
+      <div class="global-search-wrap">
+        <input id="globalSearch" type="search" placeholder="Chercher épreuve, JOIN, getter…" aria-label="Recherche globale">
+        <div class="global-search-results" id="globalSearchResults" role="listbox" aria-label="Résultats de recherche" hidden></div>
+      </div>
       <div class="top-note">Révision active · hors ligne</div>
     </header>
     <div class="layout" id="appLayout" data-view="exams">
@@ -288,6 +364,20 @@
           <nav class="source-list" id="mobileSourceList" aria-label="Documents d'origine"></nav>
         </details>
         </div>
+        <section class="corrected-exams-view" id="correctedExamsView" hidden aria-labelledby="correctedExamsTitle">
+          <div class="intro corrected-exams-intro">
+            <div><div class="eyebrow">Bibliothèque de révision</div><h1 id="correctedExamsTitle">Épreuves corrigées</h1><p>Travaille l’énoncé original, puis révèle les réponses question par question.</p></div>
+            <div class="session-mark"><strong id="correctedExamCount">0</strong>épreuves</div>
+          </div>
+          <section class="corrected-exam-toolbar" aria-label="Rechercher et filtrer les épreuves">
+            <input class="exam-search" id="correctedExamSearch" type="search" placeholder="Rechercher épreuve, notion, question…" aria-label="Rechercher une épreuve, une question ou un corrigé">
+            <select id="correctedExamSubject" aria-label="Filtrer par matière"><option value="">Toutes les matières</option></select>
+            <select id="correctedExamStatus" aria-label="Filtrer par statut"><option value="">Tous les statuts</option><option value="available">Corrigé disponible</option><option value="partial">À vérifier</option><option value="todo">À compléter</option></select>
+          </section>
+          <div class="corrected-exam-results" id="correctedExamResults" aria-live="polite"></div>
+          <section class="corrected-exam-grid" id="correctedExamGrid" aria-label="Épreuves disponibles"></section>
+        </section>
+        <section class="exam-detail-view" id="examDetailView" hidden aria-live="polite"></section>
         <section class="templates-view" id="templatesView" hidden aria-labelledby="templatesTitle">
           <div class="intro templates-intro">
             <div>
@@ -784,5 +874,7 @@
   </script>
   <script src="./templates-data.js"></script>
   <script src="./templates-ui.js"></script>
+  <script src="./epreuves-data.js"></script>
+  <script src="./epreuves-ui.js"></script>
 </body>
 </html>

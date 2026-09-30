@@ -1,0 +1,16 @@
+{
+  "id": "EP-003",
+  "source": "Epreuve_Specialite_SIL_MERCREDI.docx",
+  "title": "Épreuve de spécialité SIL — Mercredi",
+  "subject": "Spécialité SIL",
+  "session": "Mercredi",
+  "year": null,
+  "duration": null,
+  "coefficient": null,
+  "barème": "Barème par question/sous-question présent dans la source et conservé dans la transcription ; total global non précisé.",
+  "transcription_status": "⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.",
+  "correction_status": "⚠️ PARTIEL — réponses regroupées par dossier ; vérification détaillée des sous-questions et du barème à effectuer.",
+  "source_limitation": null,
+  "duplicate_of": null,
+  "source_url": "../../../Epreuve_Specialite_SIL_MERCREDI.docx"
+}

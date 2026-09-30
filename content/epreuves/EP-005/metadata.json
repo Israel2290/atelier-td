@@ -1,0 +1,16 @@
+{
+  "id": "EP-005",
+  "source": "EPREUVE_DE_SPECIALITE_SIL_Mercredi.pdf",
+  "title": "Épreuve de spécialité SIL — Mercredi (PDF)",
+  "subject": "Spécialité SIL",
+  "session": "Mercredi",
+  "year": null,
+  "duration": null,
+  "coefficient": null,
+  "barème": "Barème indiqué par dossier : Dossier 1 : 5 points, Dossier 2 : 5 points, Dossier 3 : 5 points, Dossier 4 : 5 points. Aucun total ajouté.",
+  "transcription_status": "⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.",
+  "correction_status": "⚠️ PARTIEL — corrigé type relié aux questions ; relecture pédagogique et vérification réelle du code/SQL question par question restent à effectuer.",
+  "source_limitation": null,
+  "duplicate_of": null,
+  "source_url": "../../../EPREUVE_DE_SPECIALITE_SIL_Mercredi.pdf"
+}
