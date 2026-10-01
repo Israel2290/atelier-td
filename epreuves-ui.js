@@ -149,6 +149,45 @@
       : `<p>${escapeHTML(text)}</p>`;
   }
 
+  function courseSpeechText(markdown) {
+    return String(markdown || '')
+      .replace(/^```[\s\S]*?```$/gm, '')
+      .replace(/^#{1,6}\s*/gm, '')
+      .replace(/^[-*]\s+/gm, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function attachCourseReader(container, markdown) {
+    const button = container.querySelector('[data-read-course]');
+    const status = container.querySelector('[data-course-reader-status]');
+    if (!button) return;
+    if (!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)) {
+      button.disabled = true;
+      status.textContent = 'Lecture vocale indisponible dans ce navigateur.';
+      return;
+    }
+    button.addEventListener('click', () => {
+      if (speechSynthesis.speaking) {
+        speechSynthesis.cancel();
+        button.textContent = 'Lire le cours';
+        status.textContent = 'Lecture arrêtée.';
+        return;
+      }
+      const utterance = new SpeechSynthesisUtterance(courseSpeechText(markdown));
+      utterance.lang = 'fr-FR';
+      utterance.rate = 0.92;
+      utterance.pitch = 1;
+      utterance.onstart = () => { button.textContent = 'Arrêter la lecture'; status.textContent = 'Lecture en cours…'; };
+      utterance.onend = () => { button.textContent = 'Lire le cours'; status.textContent = 'Lecture terminée.'; };
+      utterance.onerror = () => { button.textContent = 'Lire le cours'; status.textContent = 'La lecture vocale a échoué.'; };
+      speechSynthesis.cancel();
+      speechSynthesis.speak(utterance);
+    });
+  }
+
   function renderDetail() {
     if (!selectedExam) return;
     const exam = selectedExam;
@@ -166,7 +205,7 @@
       <div class="exam-detail-toolbar"><button type="button" class="mode-button ${attemptMode ? 'selected' : ''}" data-exam-mode="attempt">Faire l’épreuve</button><button type="button" class="mode-button ${courseMode ? 'selected' : ''}" data-exam-mode="course">Cours</button><button type="button" class="mode-button ${mode === 'transcription' ? 'selected' : ''}" data-exam-mode="transcription">Transcription</button><button type="button" class="mode-button ${mode === 'correction' ? 'selected' : ''}" data-exam-mode="correction">Corrigé</button><a class="text-action" href="${escapeHTML(exam.sourceUrl)}" target="_blank" rel="noopener">PDF / DOCX original</a></div>
   <div class="exam-reveal-progress"><span>${revealedCount} corrigé${revealedCount === 1 ? '' : 's'} consulté${revealedCount === 1 ? '' : 's'}</span><div class="progress-track"><div class="progress-fill" style="width:${percent}%"></div></div><span>${percent} %</span></div>
       <section class="exam-transcription" ${showTranscription ? '' : 'hidden'}><h2>Énoncé original retranscrit</h2><div class="exam-markdown">${renderMarkdown(exam.transcription)}</div></section>
-      <section class="exam-transcription" ${courseMode ? '' : 'hidden'}><h2>Cours nécessaire pour cette épreuve</h2><div class="exam-markdown">${renderMarkdown((courses[exam.id] || 'Cours non disponible pour cette épreuve.').replace(/^# Cours\s*/i, ''))}</div></section>
+      <section class="exam-transcription" ${courseMode ? '' : 'hidden'}><h2>Cours nécessaire pour cette épreuve</h2><div class="course-reader-actions"><button type="button" class="action-button" data-read-course>Lire le cours</button><span class="reader-status" data-course-reader-status>Voix française · lecture hors ligne</span></div><div class="exam-markdown">${renderMarkdown((courses[exam.id] || 'Cours non disponible pour cette épreuve.').replace(/^# Cours\s*/i, ''))}</div></section>
       <section class="exam-correction-section" ${showCorrections ? '' : 'hidden'}><h2>${attemptMode ? 'Corrigé progressif' : 'Corrigé type'}</h2><p class="written-hint">${attemptMode ? 'Essaie d’abord chaque question, puis ouvre uniquement le corrigé voulu.' : 'Ouvre les questions une à une pour consulter les réponses et explications.'}</p>${exam.correctionStatus.includes('PARTIEL') ? `<div class="feedback wrong"><strong>Corrigé partiel — vérification restante</strong>${escapeHTML(exam.correctionStatus)}</div>` : ''}<div class="exam-correction-list">${exam.corrections.map(renderCorrection).join('')}</div></section>`;
     detailView.querySelector('#backToExamList').addEventListener('click', () => { selectedExam = null; detailView.hidden = true; listView.hidden = false; renderList(); });
     detailView.querySelectorAll('[data-exam-mode]').forEach(button => button.addEventListener('click', () => {
@@ -184,6 +223,7 @@
     }));
     detailView.querySelectorAll('[data-exam-template]').forEach(button => button.addEventListener('click', () => openTemplate(button.dataset.examTemplate)));
     attachCodeCopy(detailView);
+    attachCourseReader(detailView, courses[exam.id] || '');
   }
 
   function updateRevealProgress(exam) {
