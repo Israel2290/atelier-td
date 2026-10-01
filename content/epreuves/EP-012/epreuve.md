@@ -12,6 +12,34 @@
 - Source : `APPLICATION1.pdf` (2 pages PDF)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Cette application est un entraînement d’adressage IPv4 en `/24`. Il faut séparer partie réseau et partie hôte, puis trouver les limites du sous-réseau.
+
+## 2. Notions essentielles
+
+`/24` signifie 24 bits réseau et 8 bits hôte. Masque : `255.255.255.0`. Réseau : partie hôte à zéro ; broadcast : partie hôte à un ; hôtes : entre les deux. Un octet se convertit en binaire avec les valeurs 128, 64, 32, 16, 8, 4, 2, 1.
+
+## 3. Méthodes pour résoudre les exercices
+
+1. Lire le préfixe.
+2. Écrire le masque décimal.
+3. Mettre les bits hôte à zéro pour le réseau.
+4. Mettre les bits hôte à un pour le broadcast.
+5. Exclure ces deux adresses pour la plage utilisable.
+6. Pour deux IP, comparer leurs adresses réseau.
+
+## 4. Astuces et pièges à éviter
+
+- Une adresse hôte valide n’est ni réseau ni broadcast.
+- `/24` contient 256 adresses au total mais 254 hôtes utilisables.
+- Ne pas confondre le dernier octet d’hôte avec l’adresse complète.
+
+## 5. Ce qu’il faut retenir
+
+Pour `192.168.1.0/24`, réseau `.0`, hôtes `.1` à `.254`, broadcast `.255`. La méthode réseau/host/broadcast résout tout le QCM.
 ---
 
 ## Transcription fidèle

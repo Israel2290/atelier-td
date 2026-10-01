@@ -12,6 +12,56 @@
 - Source : `ÉPREUVE DE SPÉCIALITÉ LUNDI.docx` (DOCX)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Cette épreuve de spécialité SIL combine base de données/SQL, modélisation UML, réseaux et programmation Java. Il faut savoir passer d’un besoin concret à un schéma, une requête, une architecture ou un petit programme objet.
+
+## 2. Notions essentielles
+
+### SQL et modèle relationnel
+Une table contient des lignes et des colonnes. Une clé primaire identifie une ligne ; une clé étrangère relie une table à une autre. Une inscription relie un étudiant à une formation.
+
+### UML
+Un acteur est externe au système. Un cas d’utilisation décrit un objectif. Une classe possède des attributs et des méthodes ; une association indique qui est lié à qui, avec des cardinalités comme `1`, `0..*` ou `1..*`. Une relation plusieurs-à-plusieurs se traduit souvent par une classe d’association.
+
+### Réseaux
+LAN, MAN et WAN désignent des étendues différentes. Un switch relie les postes d’un LAN ; un routeur relie des réseaux IP. Pour un sous-réseau, distinguer adresse réseau, hôtes utilisables et broadcast. DHCP attribue automatiquement une configuration IP.
+
+### Java et POO
+Une classe décrit un type, un objet est une instance, un attribut stocke l’état et une méthode réalise une action. L’encapsulation rend les attributs privés et fournit des méthodes d’accès. L’héritage réutilise une classe avec `extends` ; le polymorphisme permet d’utiliser une sous-classe via le type parent.
+
+## 3. Méthodes pour résoudre les exercices
+
+### SQL
+1. Repérer les tables et les clés dans l’énoncé.
+2. Choisir la table de départ.
+3. Ajouter les `JOIN ... ON` nécessaires.
+4. Filtrer avec `WHERE`.
+5. Ajouter `GROUP BY` puis `COUNT`, `SUM` ou `HAVING` si un regroupement est demandé.
+
+### UML
+Lister les acteurs et objectifs, puis les classes et leurs attributs. Pour chaque association, écrire les cardinalités des deux côtés. Vérifier qu’une donnée propre au lien, comme une note ou une date, est portée par une classe d’association.
+
+### Réseau
+Pour un besoin de n hôtes, choisir le plus petit bloc tel que `2^bits_hôte - 2 >= n`. Puis calculer les blocs dans l’ordre du plus grand besoin au plus petit.
+
+### Java
+Écrire les attributs privés, le constructeur, les méthodes demandées, puis un `main` qui crée des objets et appelle les méthodes. Vérifier les conditions limites comme moyenne `>= 10`.
+
+## 4. Astuces et pièges à éviter
+
+- Ne pas confondre clé primaire et clé étrangère.
+- `WHERE` filtre les lignes ; `HAVING` filtre les groupes.
+- Une classe UML n’est pas un acteur.
+- Un `/27` fournit 30 hôtes utilisables, pas 32.
+- Un constructeur Java n’a pas de type de retour.
+- Les chaînes Java se comparent avec `equals`, pas avec `==`.
+
+## 5. Ce qu’il faut retenir
+
+La copie doit suivre l’ordre de la question : identifier, relier, calculer, puis justifier. Les quatre réflexes centraux sont PK/FK en SQL, cardinalités en UML, réseau/broadcast en IP et encapsulation en Java.
 ---
 
 ## Transcription fidèle

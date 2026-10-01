@@ -12,6 +12,48 @@
 - Source : `EPREUVE_DE_SPECIALITE_jeudi.pdf` (9 pages PDF)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Cette épreuve SIL mélange SQL clinique, UML d’une application de commandes, réseaux d’entreprise avec VLSM et Java appliqué à un compte bancaire.
+
+## 2. Notions essentielles
+
+### SQL et agrégats
+Une FK pointe vers la PK d’une table mère. `SELECT` lit, `WHERE` filtre avant regroupement, `GROUP BY` forme les groupes, `HAVING` filtre les groupes et `SUM`/`COUNT` calculent des totaux. `LEFT JOIN ... IS NULL` trouve les lignes sans correspondance.
+
+### UML de commande
+Une commande appartient à un client et contient au moins un plat. La relation plusieurs-à-plusieurs Commande/Plat devient `LigneCommande`, qui porte notamment la quantité. Un acteur peut être un rôle ou un système externe.
+
+### Réseaux et VLSM
+Switch = couche 2, routeur = couche 3, TCP = couche 4, HTTP = couche 7, câble = couche 1. Encapsulation : données → segment → paquet → trame → bits. Pour 60, 28, 20 et 10 postes, choisir les blocs `/26`, `/27`, `/27`, `/28`.
+
+### Java bancaire
+Une classe bancaire encapsule numéro, titulaire et solde. Un dépôt valide le montant ; un retrait vérifie le solde. `7 / 2` vaut 3 en Java car les deux opérandes sont des entiers.
+
+## 3. Méthodes pour résoudre les exercices
+
+### SQL
+Identifier le côté parent/enfant, puis construire la requête du plus simple au plus précis. Une question « plus de 5 consultations » demande `GROUP BY` puis `HAVING COUNT(...) > 5`.
+
+### VLSM
+Allouer le plus grand bloc d’abord. Déduire la taille par `2^bits_hôte`, puis inscrire chaque plage sans chevauchement. Une adresse `169.254.x.x` conduit à vérifier le DHCP.
+
+### Java
+Écrire la classe et ses invariants, puis les méthodes métier `deposer` et `retirer`. Analyser une boucle en notant la valeur de la variable à chaque tour.
+
+## 4. Astuces et pièges à éviter
+
+- `COUNT(*)` et `COUNT(colonne)` ne réagissent pas pareil aux NULL.
+- `==` ne compare pas le contenu des `String`.
+- Un tableau Java a une taille fixe après sa création.
+- Ne pas confondre `this` et `super`.
+- Un routeur, pas un switch, relie des réseaux IP différents.
+
+## 5. Ce qu’il faut retenir
+
+La copie attend des correspondances précises : clause SQL → étape de regroupement, élément UML → multiplicité, besoin réseau → préfixe, règle métier → méthode Java.
 ---
 
 ## Transcription fidèle

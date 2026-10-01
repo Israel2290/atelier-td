@@ -12,6 +12,32 @@
 - Source : `Tronc_Commun_MERCREDI.docx` (DOCX)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Cette épreuve objective les bases Web, matérielles, réseau et Excel avec QCM, vrai/faux, associations, classements et réponses rédigées.
+
+## 2. Notions essentielles
+
+HTML utilise `<a>` pour un lien ; DNS résout les noms ; HTTPS utilise 443. Apache est un serveur Web, MySQL un SGBD, Chrome un navigateur et PHP un langage serveur. Les couches réseau sont Physique, Liaison, Réseau, Transport, Session, Présentation, Application.
+
+Les registres sont plus rapides que la RAM, le BIOS est non volatile et le bus d’adresses ne transporte pas les données. IPv6 utilise 128 bits ; IPv4 privée n’est pas publique. Excel distingue `MAX`, `NB.SI`, `CONCATENER`, `ARRONDI` et `AUJOURDHUI`.
+
+## 3. Méthodes pour résoudre les exercices
+
+Pour une association, identifier le rôle de chaque élément avant d’associer. Pour un classement, partir du niveau bas vers haut ou du déclencheur vers le résultat. Pour 50 machines, ajouter réseau et broadcast avant de choisir le CIDR.
+
+## 4. Astuces et pièges à éviter
+
+- `<br>` est un saut de ligne, pas un paragraphe.
+- Le bus d’adresses indique une position ; le bus de données transporte une valeur.
+- SMTP envoie le courrier ; IMAP/POP le récupèrent.
+- Un `/26` fournit 62 hôtes utilisables.
+
+## 5. Ce qu’il faut retenir
+
+Les questions à choix testent souvent une différence de rôle. Lire chaque proposition jusqu’au bout et justifier les faux avec le concept précis.
 ---
 
 ## Transcription fidèle

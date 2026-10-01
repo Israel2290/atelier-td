@@ -12,6 +12,32 @@
 - Source : `Tronc_Commun_VENDREDI.docx` (DOCX)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Le vendredi combine Web/API, architecture système, diagnostic réseau et Excel sous forme de QCM, vrai/faux, associations, classements et cas pratiques.
+
+## 2. Notions essentielles
+
+REST expose des ressources par URL, souvent en JSON ; HTTP 201 indique une création. Front-end, back-end et base de données ont des rôles distincts. Un bus relie les composants, un SSD stocke en flash et un pilote fait l’interface avec le matériel.
+
+Réseau : `ping`, `ipconfig`, `tracert`, `nslookup`, ARP, VLAN, DHCP et TCP handshake. Un `/26` donne 62 hôtes ; IPv4 fait 32 bits, une MAC 48 bits. Excel utilise validation, filtres, `$`, `SOMME.SI.ENS`, `ARRONDI` et des codes d’erreur.
+
+## 3. Méthodes pour résoudre les exercices
+
+Pour un handshake, mémoriser SYN → SYN-ACK → ACK. Pour un diagnostic, tester d’abord le lien puis IP locale, passerelle, IP externe et nom DNS. Pour Excel, suivre la chaîne sélectionner → fonction → plage → critère → résultat.
+
+## 4. Astuces et pièges à éviter
+
+- HTTPS ne garantit pas qu’un site est fiable.
+- Une IP `169.254.x.x` pointe souvent vers DHCP.
+- Un VLAN sépare logiquement ; il faut encore un routage/pare-feu correct.
+- `NBVAL` compte les cellules non vides, pas seulement les nombres.
+
+## 5. Ce qu’il faut retenir
+
+Dans un cas pratique, répondre avec une configuration ou une commande concrète. Dans un QCM, distinguer le rôle exact du protocole ou de l’outil.
 ---
 
 ## Transcription fidèle

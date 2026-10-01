@@ -12,6 +12,30 @@
 - Source : `Tronc_Commun_JEUDI.docx` (DOCX)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Le jeudi utilise quatre dossiers de technologie Web, architecture, réseaux et Excel avec QCM, associations, classements, erreurs et cas pratiques.
+
+## 2. Notions essentielles
+
+Outils navigateur, DNS, codes HTTP, responsive design, HTML/CSS/JavaScript/JSON et mise en ligne structurent le Web. En matériel : fréquence en hertz, cache, SSD, BIOS/UEFI, POST, pilotes, partitions et unités binaires. En réseau : pare-feu, DHCP, DNS, NAT, VPN, OSI, APIPA et sous-réseaux. En Excel : `SI`, références absolues, `RECHERCHEV`, agrégats, formats et erreurs.
+
+## 3. Méthodes pour résoudre les exercices
+
+Pour « trouver l’erreur », repérer le concept violé puis réécrire toute la version correcte. Pour un classement, reconstruire la chaîne logique. Pour un cas pratique, répondre dans les sous-parties (a), (b), (c) et donner un exemple concret. Pour le réseau, isoler couche physique, IP, route, DNS.
+
+## 4. Astuces et pièges à éviter
+
+- `ERR_NAME_NOT_RESOLVED` désigne d’abord une résolution DNS échouée.
+- `#NOM?` vient souvent d’un texte sans guillemets dans une formule.
+- `#REF!` indique une référence supprimée.
+- La source s’arrête avant le taux de remise : ne pas l’inventer.
+
+## 5. Ce qu’il faut retenir
+
+Une correction complète traite chaque sous-partie et distingue le symptôme, la cause puis la solution. Signaler explicitement une donnée absente du sujet.
 ---
 
 ## Transcription fidèle

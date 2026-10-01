@@ -12,6 +12,34 @@
 - Source : `Tronc_Commun_MARDI.docx` (DOCX)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Le mardi approfondit Web, architecture, réseaux et Excel avec DNS, sécurité Web, mémoire, protocoles, conversions, fonctions et graphiques.
+
+## 2. Notions essentielles
+
+DNS résout un nom en IP ; GET consulte et POST transmet des données ; cookies/sessions conservent un état. SQL injection et XSS sont des failles distinctes : requêtes préparées côté serveur, échappement de sortie côté affichage.
+
+Le cycle processeur est fetch, decode, execute. La hiérarchie registres/cache/RAM/stockage équilibre vitesse et capacité. TCP garantit la livraison ; UDP privilégie la faible latence. Les quatre couches TCP/IP sont accès réseau, Internet, transport, application.
+
+Excel : `NB`, `NBVAL`, `NB.SI`, `SOMME.SI`, `SI` imbriqué, mise en forme conditionnelle et graphiques. Une courbe montre une évolution ; un secteur montre des parts.
+
+## 3. Méthodes pour résoudre les exercices
+
+Comparer deux technologies avec critères, avantage et exemple. Pour les conversions, décomposer en puissances de 2 ou de 16. Pour une formule Excel, identifier plage, critère, valeur vraie et valeur fausse.
+
+## 4. Astuces et pièges à éviter
+
+- HTTPS protège le transport mais ne garantit pas l’honnêteté du site.
+- TCP/UDP ne se différencient pas seulement par la vitesse : la fiabilité est le critère central.
+- Une référence absolue utilise `$` devant ligne et colonne.
+- Échapper les sorties n’est pas la même chose que valider les entrées.
+
+## 5. Ce qu’il faut retenir
+
+Pour chaque comparaison : définition, fonctionnement, cas d’usage et limite. Pour chaque formule : arguments, plage et résultat attendu.
 ---
 
 ## Transcription fidèle

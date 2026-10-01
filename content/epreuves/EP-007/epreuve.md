@@ -13,6 +13,29 @@
 - Variante proche de EP-006.
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Cette version b reprend les notions principales du tronc commun du lundi : Web, architecture, réseaux et Excel. Utiliser le contenu du sujet affiché et vérifier les différences de numérotation avec la version lundi.
+
+## 2. Notions essentielles
+
+Revoir client/serveur, URL, HTTP/HTTPS, HTML/CSS/JavaScript ; processeur, RAM, ROM, carte mère et démarrage ; LAN/MAN/WAN, OSI, DHCP/DNS et subnetting ; cellules Excel, références et fonctions `SI`, `SOMME`, `MOYENNE`, `MAX`, `RECHERCHEV`.
+
+## 3. Méthodes pour résoudre les exercices
+
+Pour une définition, écrire le sens puis un exemple. Pour un calcul IP, trouver masque, réseau, broadcast et plage. Pour Excel, vérifier les références absolues/relatives et les guillemets des textes. Comparer les notions par critères plutôt que par une phrase vague.
+
+## 4. Astuces et pièges à éviter
+
+- Cette version est proche du lundi mais doit être vérifiée séparément.
+- Ne pas confondre HTTP avec HTTPS ni RAM avec stockage.
+- `WHERE`/`HAVING` et réseau/broadcast sont des couples souvent confondus.
+
+## 5. Ce qu’il faut retenir
+
+Répondre avec une définition, une méthode courte et un exemple adapté aux données exactes de la version b.
 ---
 
 ## Transcription fidèle

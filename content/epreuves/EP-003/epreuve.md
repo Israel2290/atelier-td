@@ -12,6 +12,47 @@
 - Source : `Epreuve_Specialite_SIL_MERCREDI.docx` (DOCX)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+L’épreuve porte sur un système hôtelier. Elle demande de relier des clients, chambres, réservations et paiements en SQL/UML, de segmenter un réseau d’hôtel et d’écrire des classes Java.
+
+## 2. Notions essentielles
+
+### Base de données d’un hôtel
+`CLIENT`, `CHAMBRE`, `RESERVATION` et `PAIEMENT` ont chacune une clé primaire. Une réservation porte les clés étrangères du client et de la chambre ; un paiement référence une réservation. `INNER JOIN` ne garde que les correspondances, `LEFT JOIN` conserve aussi les chambres sans réservation.
+
+### UML
+Un client réserve une chambre ; une réservation possède des dates, un statut et peut recevoir plusieurs paiements. Les cardinalités traduisent ces règles. Un scénario nominal décrit les étapes normales d’une réservation.
+
+### Réseau d’hôtel
+Séparer Administration, Services et Wi-Fi Clients en VLAN ou sous-réseaux. Le pare-feu contrôle les flux ; le Wi-Fi invité ne doit pas accéder aux serveurs internes. Le VLSM attribue `/25` à 80 postes, `/26` à 40 et `/27` à 20.
+
+### Java
+Une classe `Chambre` encapsule numéro, type, prix et état. `estDisponible()` teste l’état ; `calculerPrixSejour()` multiplie prix et nombre de nuits. `Suite extends Chambre` illustre l’héritage ; une référence `Chambre` contenant une `Suite` illustre le polymorphisme.
+
+## 3. Méthodes pour résoudre les exercices
+
+### Requêtes SQL
+Suivre les chemins FK : client → réservation → chambre et réservation → paiement. Pour les chambres sans réservation, partir de `CHAMBRE` et utiliser `LEFT JOIN`. Pour un total, utiliser `SUM` et `GROUP BY`.
+
+### VLSM et calcul CIDR
+Trier les besoins par taille, calculer les blocs et noter réseau/hôtes/broadcast. Pour `192.168.60.34/27`, le pas est 32 : trouver le bloc qui contient 34.
+
+### Java de réservation
+Valider que le nombre de nuits est positif, utiliser `LocalDate` et calculer `ChronoUnit.DAYS.between(arrivee, depart)`. Écrire les méthodes d’accès seulement pour les attributs nécessaires.
+
+## 4. Astuces et pièges à éviter
+
+- `COUNT(IdReservation)` est préférable à `COUNT(*)` avec un `LEFT JOIN`.
+- Le numéro de chambre n’est pas forcément un identifiant technique stable.
+- Une VLAN invitée doit être filtrée par routage/pare-feu, pas seulement nommée.
+- `Suite` doit appeler `super(...)` dans son constructeur.
+
+## 5. Ce qu’il faut retenir
+
+Les mêmes règles se répondent : PK/FK en SQL, associations en UML, VLAN/subnets en réseau et objets encapsulés en Java. Toujours justifier le choix avec la contrainte du sujet.
 ---
 
 ## Transcription fidèle

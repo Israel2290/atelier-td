@@ -12,6 +12,50 @@
 - Source : `EPREUVE_DE_SPECIALITE_SIL_Mercredi.pdf` (9 pages PDF)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Cette épreuve utilise une bibliothèque, une plateforme de covoiturage, un établissement réseau et une boutique Java. Elle évalue les bases de données, UML, IPv4/DHCP et la POO.
+
+## 2. Notions essentielles
+
+### Bibliothèque et intégrité
+Une table enfant porte une FK vers sa table mère. `ON DELETE RESTRICT` empêche de supprimer une ligne encore référencée. Une PK ne peut pas être NULL. L’ordre d’insertion suit les dépendances : parents puis enfants.
+
+### UML
+`include` signifie qu’un comportement est obligatoire dans le cas de base. Composition : la partie dépend du cycle de vie du tout. `-` signifie privé. Diagramme de classes = structure ; diagramme d’activités = flux ; séquence = messages dans le temps.
+
+### Réseau scolaire
+Routeur = liaison entre réseaux. `/26`, `/27` et `/28` se choisissent avec `2^h - 2`. DHCP suit Discover, Offer, Request, Acknowledge. Les ports usuels et les commandes `ping`, `tracert`, `ipconfig` servent au diagnostic.
+
+### Java
+`new` crée un objet, `private` protège un attribut, `extends` exprime l’héritage. Un constructeur porte le nom de la classe. Les types primitifs comme `int` et `double` ne sont pas des classes.
+
+## 3. Méthodes pour résoudre les exercices
+
+### SQL
+Lire les relations, répondre aux QCM d’intégrité référentielle, puis écrire les requêtes avec `JOIN`, `GROUP BY`, `COUNT` et `IS NULL`. Pour les lignes jamais empruntées, utiliser une jointure gauche suivie d’un test NULL.
+
+### UML
+Traduire chaque phrase de l’énoncé en acteur, cas, classe ou multiplicité. Mettre la donnée propre à une relation dans la classe d’association.
+
+### Réseau
+DORA se mémorise dans l’ordre ; une IP APIPA est un symptôme DHCP. Pour une panne, partir du câble, de la configuration locale, de la passerelle, de l’IP distante puis du DNS.
+
+### Java
+Pour une analyse de code, simuler les variables ligne par ligne. Pour une classe, produire attributs privés, constructeur, getters/setters, méthodes métier puis `main`.
+
+## 4. Astuces et pièges à éviter
+
+- Une classe abstraite ne s’instancie pas directement.
+- Une composition est plus forte qu’une simple association.
+- `extends` n’est pas `implements`.
+- Une adresse privée n’est pas routable directement sur Internet.
+
+## 5. Ce qu’il faut retenir
+
+Toujours distinguer structure, comportement et lien : table/clés en SQL, classes/cardinalités en UML, couches/ports en réseau et objets/méthodes en Java.
 ---
 
 ## Transcription fidèle

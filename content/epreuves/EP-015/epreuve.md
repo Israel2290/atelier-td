@@ -12,6 +12,37 @@
 - Source : `QCM_Subnetting_EXERCICE .pdf` (2 pages PDF)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Ce QCM rassemble les règles générales de sous-réseautage IPv4 : masques, tailles de blocs, classes historiques, hôtes et communication entre réseaux.
+
+## 2. Notions essentielles
+
+Pour un préfixe `/n`, bits hôte = `32 - n`, adresses totales = `2^(32-n)` et hôtes classiques = `2^(32-n)-2`. La taille du bloc dans le dernier octet est `256 - valeur_du_masque`.
+
+Un `/29` a 8 adresses, 6 hôtes et un pas de 8. Un `/30` a le masque `255.255.255.252`. Une adresse de broadcast sert à joindre tous les hôtes et ne s’attribue pas à une machine.
+
+## 3. Méthodes pour résoudre les exercices
+
+1. Convertir le masque ou le préfixe.
+2. Calculer les bits hôte et la taille de bloc.
+3. Trouver le début et la fin du bloc contenant l’IP.
+4. Déterminer la plage d’hôtes.
+5. Comparer les réseaux avant de conclure sur une communication directe.
+6. Pour un besoin de 6 hôtes, choisir le plus petit bloc fournissant au moins 6 adresses utilisables.
+
+## 4. Astuces et pièges à éviter
+
+- Le broadcast n’est pas la passerelle par défaut.
+- Deux adresses privées peuvent être dans des réseaux différents.
+- Les classes A/B/C sont historiques ; le CIDR est la méthode actuelle.
+- Une taille totale de 8 n’est pas une capacité de 8 hôtes.
+
+## 5. Ce qu’il faut retenir
+
+Mémoriser les couples `/29 = .248 = 8 adresses = 6 hôtes` et `/30 = .252`. La taille de bloc permet de résoudre rapidement les QCM.
 ---
 
 ## Transcription fidèle

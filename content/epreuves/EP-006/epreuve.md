@@ -12,6 +12,48 @@
 - Source : `Tronc_Commun_LUNDI.docx` (DOCX)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Le tronc commun du lundi couvre Web, architecture matérielle, réseaux et Excel. Les questions sont surtout rédactionnelles et demandent des définitions accompagnées d’un exemple.
+
+## 2. Notions essentielles
+
+### Web
+Le client (navigateur) envoie une requête au serveur. Une URL contient protocole, hôte, port, chemin, paramètres et fragment. DNS traduit le nom en IP ; HTTPS ajoute le chiffrement TLS. HTML structure, CSS met en forme et JavaScript rend la page interactive.
+
+### Architecture
+Le processeur exécute les instructions ; la RAM est volatile ; ROM et stockage sont persistants. La carte mère relie les composants. Le démarrage passe par BIOS/UEFI, POST, chargeur puis noyau.
+
+### Réseau
+LAN/MAN/WAN décrivent la portée. Hub diffuse, switch commute des MAC, routeur achemine des IP. `/24` laisse 8 bits hôte ; réseau et broadcast sont réservés. DHCP attribue une configuration, DNS résout un nom.
+
+### Excel
+Classeur, feuille, cellule et plage sont les niveaux de base. Une référence relative se déplace ; `$A$1` est absolue. `SI`, `SOMME`, `MOYENNE`, `MAX`, `RECHERCHEV` et les tableaux croisés sont essentiels.
+
+## 3. Méthodes pour résoudre les exercices
+
+### Question théorique
+Donner d’abord une définition courte, puis le rôle et un exemple concret. Pour une URL ou un démarrage, suivre l’ordre chronologique.
+
+### Calcul réseau
+Appliquer masque, réseau, broadcast et `2^(32-prefixe)-2` dans cet ordre.
+
+### Formule Excel
+Écrire le nom de fonction, les arguments et les guillemets autour des textes. Vérifier quelles références doivent rester fixes lors d’une recopie.
+
+## 4. Astuces et pièges à éviter
+
+- Internet n’est pas synonyme du Web.
+- POST n’est pas un chiffrement : HTTPS reste nécessaire.
+- RAM et stockage n’ont pas la même persistance.
+- Un switch ne remplace pas un routeur entre réseaux.
+- `SI` utilise des textes entre guillemets.
+
+## 5. Ce qu’il faut retenir
+
+Une bonne réponse de tronc commun suit le triplet définition → fonctionnement → exemple. Les formules et calculs doivent être écrits avec leurs bornes et unités.
 ---
 
 ## Transcription fidèle

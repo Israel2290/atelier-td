@@ -12,6 +12,47 @@
 - Source : `Epreuve_Specialite_SIL_MARDI.docx` (DOCX)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Cette épreuve travaille la conception d’une plateforme de formation : requêtes SQL, modèle UML, interconnexion de sites et programmation Java avec des étudiants.
+
+## 2. Notions essentielles
+
+### SQL
+`SELECT` lit des colonnes, `WHERE` filtre, `JOIN` relie les tables et `GROUP BY` prépare un comptage par formation. Une table d’inscription contient les clés étrangères de l’étudiant et de la formation.
+
+### UML de formation en ligne
+Un étudiant peut suivre plusieurs cours et un cours plusieurs étudiants : il faut une association `Inscription`. Une évaluation appartient à un cours ; une note est liée à un étudiant et à une évaluation.
+
+### Réseaux inter-sites
+Un LAN couvre un site ; un WAN relie le siège aux agences. Le switch connecte localement, le routeur achemine entre sous-réseaux et DHCP distribue les paramètres. En VLSM, on réserve d’abord les blocs les plus grands.
+
+### Java objet
+Utiliser une classe `Etudiant` avec des attributs privés, un constructeur, une méthode d’affichage et `admis()`. L’encapsulation protège l’état ; l’héritage spécialise une classe ; le polymorphisme permet plusieurs implémentations derrière un type commun.
+
+## 3. Méthodes pour résoudre les exercices
+
+### Requête avec jointure
+Commencer par la table contenant l’information demandée, écrire la clé de jointure, puis filtrer. Pour compter par formation, utiliser `COUNT(...)` et `GROUP BY`.
+
+### VLSM
+Calculer le nombre d’hôtes nécessaire, choisir `/26`, `/27`, `/28`, etc., puis attribuer les réseaux sans chevauchement. Pour chaque bloc, donner réseau, première IP, dernière IP et broadcast.
+
+### Programme Java
+Écrire les champs, initialiser dans le constructeur, afficher avec une méthode et retourner un booléen pour une condition. Dans `main`, tester au moins un étudiant admis et un étudiant ajourné.
+
+## 4. Astuces et pièges à éviter
+
+- Une association plusieurs-à-plusieurs nécessite une classe/table intermédiaire.
+- Ne pas utiliser une passerelle pour masquer un mauvais masque.
+- Une référence de classe fille doit respecter le constructeur parent.
+- `moyenne >= 10` inclut exactement 10.
+
+## 5. Ce qu’il faut retenir
+
+Le chemin de résolution est : schéma relationnel → relations UML → adressage réseau → classe Java testable. Chaque réponse doit rester liée au vocabulaire de l’énoncé.
 ---
 
 ## Transcription fidèle

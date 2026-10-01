@@ -12,6 +12,31 @@
 - Source : `APPLICATION3.pdf` (2 pages PDF)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Cette application porte sur le découpage en blocs `/29`, utiles pour de petits réseaux.
+
+## 2. Notions essentielles
+
+`/29` laisse 3 bits hôte : 8 adresses totales et 6 hôtes utilisables. Le masque est `255.255.255.248` et le pas est `256 - 248 = 8`.
+
+Les blocs finissent par `.0`, `.8`, `.16`, `.24`, `.32`, etc. La première adresse est le réseau ; la dernière est le broadcast.
+
+## 3. Méthodes pour résoudre les exercices
+
+Repérer le multiple de 8 qui précède le dernier octet. Ajouter 7 pour trouver le broadcast ; les six valeurs internes sont utilisables. Pour savoir si deux hôtes communiquent directement, comparer leurs blocs `/29`.
+
+## 4. Astuces et pièges à éviter
+
+- `.228` appartient au bloc `.224–.231`.
+- `.224` est réseau et `.231` broadcast.
+- Depuis un `/24`, passer à `/29` emprunte 5 bits : 32 sous-réseaux.
+
+## 5. Ce qu’il faut retenir
+
+`/29` = `.248`, blocs de 8, 6 hôtes utilisables. Toujours calculer les limites avant de juger une IP.
 ---
 
 ## Transcription fidèle

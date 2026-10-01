@@ -12,6 +12,31 @@
 - Source : `APPLICATION 2.pdf` (2 pages PDF)
 - Statut de transcription : ⚠️ PARTIEL — extraction Markdown générée ; relecture fidèle intégrale par rapport à la source à effectuer.
 
+# Cours
+
+## 1. Comprendre la matière
+
+Cette application porte sur le découpage d’un `/24` en sous-réseaux `/27`.
+
+## 2. Notions essentielles
+
+`/27` laisse 5 bits hôte : `2^5 = 32` adresses par bloc et `32 - 2 = 30` hôtes utilisables. Le masque est `255.255.255.224` et le pas est `256 - 224 = 32`.
+
+Les réseaux successifs sont `.0`, `.32`, `.64`, `.96`, etc. Dans un bloc, réseau = première adresse, broadcast = dernière, hôtes = adresses intermédiaires.
+
+## 3. Méthodes pour résoudre les exercices
+
+Trouver le multiple de 32 inférieur ou égal au dernier octet. Ajouter 31 pour le broadcast. Comparer ensuite l’IP à la plage du bloc. Pour compter les sous-réseaux depuis `/24`, emprunter 3 bits : `2^3 = 8`.
+
+## 4. Astuces et pièges à éviter
+
+- `.28` appartient au bloc `.0–.31`, pas à un réseau `.24`.
+- `.31` est broadcast ; `.32` commence le bloc suivant.
+- Une IP peut être valide dans un bloc mais appartenir à un autre avec un autre masque.
+
+## 5. Ce qu’il faut retenir
+
+`/27` = masque `.224`, pas 32 hôtes mais 30 utilisables, blocs de 32 et 8 sous-réseaux issus d’un `/24`.
 ---
 
 ## Transcription fidèle
