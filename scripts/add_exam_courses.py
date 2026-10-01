@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -510,3 +511,9 @@ for exam_id, course in COURSES.items():
     if '\n# Cours\n' in before:
         before = before.split('\n# Cours\n', 1)[0].rstrip()
     path.write_text(before.rstrip() + '\n\n' + course.strip() + marker + after, encoding='utf-8')
+
+course_data = {exam_id: course.strip() for exam_id, course in COURSES.items()}
+(ROOT / 'epreuves-courses.js').write_text(
+    'window.ATELIER_EXAM_COURSES = ' + json.dumps(course_data, ensure_ascii=False) + ';\n',
+    encoding='utf-8'
+)

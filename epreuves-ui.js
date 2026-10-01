@@ -1,5 +1,6 @@
 (() => {
   const exams = window.ATELIER_EXAMS || [];
+  const courses = window.ATELIER_EXAM_COURSES || {};
   const templates = window.ATELIER_TEMPLATES || [];
   const layout = document.getElementById('appLayout');
   const listView = document.getElementById('correctedExamsView');
@@ -154,6 +155,7 @@
     const saved = examProgress(exam.id);
     const mode = currentMode;
     const attemptMode = mode === 'attempt';
+    const courseMode = mode === 'course';
     const showTranscription = attemptMode || mode === 'transcription';
     const showCorrections = attemptMode || mode === 'correction';
     const revealedCount = (saved.revealed || []).length;
@@ -161,9 +163,10 @@
     detailView.innerHTML = `<button type="button" class="text-action exam-back" id="backToExamList">← Toutes les épreuves</button>
       <div class="intro exam-detail-intro"><div><div class="eyebrow">${escapeHTML(exam.id)} · ${escapeHTML(exam.subject)}</div><h1>${escapeHTML(exam.title)}</h1><p>${exam.sourceLimitation ? escapeHTML(exam.sourceLimitation) : escapeHTML(exam.correctionStatus)}</p></div><div class="session-mark"><strong>${exam.corrections.length}</strong>fiches de correction</div></div>
       <section class="exam-metadata" aria-label="Informations de l’épreuve"><div><span>Année</span><strong>${exam.year || 'Non précisée'}</strong></div><div><span>Session</span><strong>${escapeHTML(exam.session)}</strong></div><div><span>Durée</span><strong>${exam.duration || 'Non précisée'}</strong></div><div><span>Barème</span><strong>${escapeHTML(exam.barème || 'Non précisé')}</strong></div></section>
-      <div class="exam-detail-toolbar"><button type="button" class="mode-button ${attemptMode ? 'selected' : ''}" data-exam-mode="attempt">Faire l’épreuve</button><button type="button" class="mode-button ${mode === 'transcription' ? 'selected' : ''}" data-exam-mode="transcription">Transcription</button><button type="button" class="mode-button ${mode === 'correction' ? 'selected' : ''}" data-exam-mode="correction">Corrigé</button><a class="text-action" href="${escapeHTML(exam.sourceUrl)}" target="_blank" rel="noopener">PDF / DOCX original</a></div>
+      <div class="exam-detail-toolbar"><button type="button" class="mode-button ${attemptMode ? 'selected' : ''}" data-exam-mode="attempt">Faire l’épreuve</button><button type="button" class="mode-button ${courseMode ? 'selected' : ''}" data-exam-mode="course">Cours</button><button type="button" class="mode-button ${mode === 'transcription' ? 'selected' : ''}" data-exam-mode="transcription">Transcription</button><button type="button" class="mode-button ${mode === 'correction' ? 'selected' : ''}" data-exam-mode="correction">Corrigé</button><a class="text-action" href="${escapeHTML(exam.sourceUrl)}" target="_blank" rel="noopener">PDF / DOCX original</a></div>
   <div class="exam-reveal-progress"><span>${revealedCount} corrigé${revealedCount === 1 ? '' : 's'} consulté${revealedCount === 1 ? '' : 's'}</span><div class="progress-track"><div class="progress-fill" style="width:${percent}%"></div></div><span>${percent} %</span></div>
       <section class="exam-transcription" ${showTranscription ? '' : 'hidden'}><h2>Énoncé original retranscrit</h2><div class="exam-markdown">${renderMarkdown(exam.transcription)}</div></section>
+      <section class="exam-transcription" ${courseMode ? '' : 'hidden'}><h2>Cours nécessaire pour cette épreuve</h2><div class="exam-markdown">${renderMarkdown((courses[exam.id] || 'Cours non disponible pour cette épreuve.').replace(/^# Cours\s*/i, ''))}</div></section>
       <section class="exam-correction-section" ${showCorrections ? '' : 'hidden'}><h2>${attemptMode ? 'Corrigé progressif' : 'Corrigé type'}</h2><p class="written-hint">${attemptMode ? 'Essaie d’abord chaque question, puis ouvre uniquement le corrigé voulu.' : 'Ouvre les questions une à une pour consulter les réponses et explications.'}</p>${exam.correctionStatus.includes('PARTIEL') ? `<div class="feedback wrong"><strong>Corrigé partiel — vérification restante</strong>${escapeHTML(exam.correctionStatus)}</div>` : ''}<div class="exam-correction-list">${exam.corrections.map(renderCorrection).join('')}</div></section>`;
     detailView.querySelector('#backToExamList').addEventListener('click', () => { selectedExam = null; detailView.hidden = true; listView.hidden = false; renderList(); });
     detailView.querySelectorAll('[data-exam-mode]').forEach(button => button.addEventListener('click', () => {
